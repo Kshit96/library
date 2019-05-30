@@ -37,12 +37,16 @@ public class BookControllerTest {
     @Test
     public void addBook_shouldAddBookInTheLibrary_whenGivenBookIsNotAddedInTheLibrary() throws Exception {
         Author author = new Author("JRR Tolkein", "Crazy guy");
-        Book book = new Book("LOTR", "Fantasy", author, 10);
+
+        Author saveAuthor = authorRepository.save(author);
+
+        Book book = new Book("LOTR", "Fantasy", saveAuthor, 10);
         final ObjectMapper mapper = new ObjectMapper();
 
-        app.perform(post("/library/add")
-                .content(mapper.writeValueAsString(book))
-                .contentType(MediaType.APPLICATION_JSON))
+        app.perform(post("/library/add.json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(book)))
                 .andExpect(status().isOk());
     }
 
