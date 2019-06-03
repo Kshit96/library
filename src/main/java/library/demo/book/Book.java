@@ -24,14 +24,14 @@ public class Book {
 
 
     @Column
-    int copies;
+    int availableCopies;
 
 
     public Book(String title, String description, Author author, int copies) {
         this.title = title;
         this.description = description;
         this.author = author;
-        this.copies = copies;
+        this.availableCopies = copies;
     }
 
     public Book() {
@@ -70,11 +70,21 @@ public class Book {
         this.author = author;
     }
 
-    public int getCopies() {
-        return copies;
+    public int getAvailableCopies() {
+        return availableCopies;
     }
 
-    public void setCopies(int copies) {
-        this.copies = copies;
+    public void setAvailableCopies(int availableCopies) {
+        this.availableCopies = availableCopies;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        Book otherBook = (Book)object;
+
+        if(this.id == otherBook.id && otherBook.availableCopies == this.availableCopies && otherBook.description.equals(this.description) && otherBook.title.equals(this.title)) {
+            return true;
+        }
+        return false;
     }
 }
