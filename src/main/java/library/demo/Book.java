@@ -1,5 +1,6 @@
 package library.demo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,9 +18,9 @@ public class Book {
     @Column
     String description;
 
-    @JsonManagedReference
+
     @ManyToOne
-    @JoinColumn(name="author_id", nullable = false)
+    @JoinColumn(name="author_id")
     private Author author;
 
 

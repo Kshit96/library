@@ -8,13 +8,16 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/library",consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/library")
 public class BookController {
 
     @Autowired
     BookRepository bookRepository;
 
-    @PostMapping(value = "/add.json")
+    @Autowired
+    AuthorRepository authorRepository;
+
+    @PostMapping("/add")
     public void addBook(@RequestBody Book book){
         bookRepository.save(book);
     }

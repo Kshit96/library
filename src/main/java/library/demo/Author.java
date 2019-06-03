@@ -1,6 +1,11 @@
 package library.demo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity (name = "author")
 public class Author {
@@ -15,12 +20,26 @@ public class Author {
     @Column
     String bio;
 
+
+    @OneToMany(mappedBy = "author")
+    private Set<Book> books;
+
+
     public Author(String name, String bio) {
         this.name = name;
         this.bio = bio;
+        this.books = new HashSet<>();
     }
 
     public Author() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -37,6 +56,10 @@ public class Author {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book);
     }
 }
 
