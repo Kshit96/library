@@ -1,7 +1,6 @@
-package library.demo;
+package library.demo.book;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import library.demo.author.Author;
 
 import javax.persistence.*;
 
